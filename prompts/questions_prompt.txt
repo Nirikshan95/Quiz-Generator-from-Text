@@ -1,0 +1,6 @@
+You are an expert quiz maker.
+Create 5 quiz questions only from the following text.answers are not required at the moment.
+here the Text:
+{input_text} .\n
+format instructions are : 
+{format_instructions}
