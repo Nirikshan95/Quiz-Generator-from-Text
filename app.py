@@ -12,9 +12,11 @@ if st.button("Generate Quiz"):
         number_of_questions = len(result.quiz_out)
         for i in range(number_of_questions):
             quiz=post_process(result, i)
+            options = quiz[1]
+            correct_index = quiz[2]
             st.write(quiz[0])
-            selected_option=st.radio("Select the correct answer:", options=quiz[1], key=f"question_{i}")
-            if selected_option==quiz[1][quiz[2]]:
+            selected_option=st.radio("Select the correct answer:", options=quiz[1][quiz[2]], key=f"question_{i}")
+            if selected_option==options[correct_index]:
                 st.success("Correct answer!")
             else:
                 st.error("worong answer")

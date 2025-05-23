@@ -1,5 +1,5 @@
-You are a quiz master. Based on the text below, generate  multiple-choice questions.
-Each question must have 4 options, and indicate which is the correct option using a number from 1 to 4.
+You are a quiz master. Based on the text below, generate  2 multiple-choice questions.
+Each question must have 4 options, and indicate which is the correct option using a number from 0 to 3.
 
 Text:
 {input_text}
