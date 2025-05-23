@@ -1,9 +1,0 @@
-You are an intelligent assistant.
-
-Using the text and the quiz questions, provide accurate answers.
-
-Text:
-{input_text}
-
-Questions:
-{questions}

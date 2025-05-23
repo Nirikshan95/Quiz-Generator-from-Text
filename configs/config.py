@@ -1,4 +1,4 @@
 # default model configurations
-MODEL_REPO_ID = "deepseek-ai/DeepSeek-Prover-V2-671B"
+MODEL_REPO_ID = "deepseek-ai/DeepSeek-V3-0324"
 TEMPERATURE=0.6
-MAX_TOKENS=500
+MAX_TOKENS=50
