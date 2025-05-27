@@ -4,21 +4,6 @@ sys.path.append("./")
 from configs import config
 import os
 
-'''def get_chat_model():
-    try:
-        llm=HuggingFacePipeline.from_model_id(
-        model_id=config.MODEL_REPO_ID,
-        task="text-generation",
-        model_kwargs={
-            "temperature": config.TEMPERATURE,
-            "max_new_tokens": config.MAX_TOKENS,
-            "token": os.getenv("HUGGINGFACEHUB_API_TOKEN")
-        },
-        )
-        return ChatHuggingFace(llm=llm)
-    except Exception as e:
-        print(f"Error initializing model: {e}")'''
-        
 def get_chat_model():
     """
     The function `get_chat_model` returns a ChatHuggingFace model with specified parameters.
