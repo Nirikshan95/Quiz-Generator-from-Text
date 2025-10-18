@@ -1,6 +1,5 @@
 import sys
 from langchain.prompts import PromptTemplate
-sys.path.append("./")
 from models.load_chat_model import get_chat_model
 from output_parser.quiz_parser import parse_quiz
 

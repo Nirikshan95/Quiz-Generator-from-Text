@@ -1,4 +1,7 @@
 langchain
 langchain_huggingface
+python-dotenv
 streamlit
 accelerate
+fastapi
+uvicorn

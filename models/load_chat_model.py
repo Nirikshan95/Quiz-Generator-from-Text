@@ -1,9 +1,9 @@
-from langchain_huggingface import ChatHuggingFace,HuggingFaceEndpoint,HuggingFacePipeline
+from langchain_huggingface import ChatHuggingFace,HuggingFaceEndpoint
 import sys
-sys.path.append("./")
 from configs import config
 import os
-
+from dotenv import load_dotenv
+load_dotenv()
 def get_chat_model():
     """
     The function `get_chat_model` returns a ChatHuggingFace model with specified parameters.
@@ -14,15 +14,10 @@ def get_chat_model():
         llm=HuggingFaceEndpoint(
         repo_id=config.MODEL_REPO_ID,
         temperature=config.TEMPERATURE,
-        max_new_tokens=config.MAX_TOKENS,
-        huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN")
+        max_new_tokens=config.MAX_TOKENS
+        #huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN")
         )
         return ChatHuggingFace(llm=llm)
     except Exception as e:
         print(f"Error initializing model: {e}")
-if __name__ == "__main__":
-    chat_model = get_chat_model()
-    print(chat_model)
-    input="Hello, how are you?"
-    result=chat_model.invoke(input)
-    print(result)
+        return None
