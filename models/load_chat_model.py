@@ -12,10 +12,11 @@ def get_chat_model():
     """
     try:
         llm=HuggingFaceEndpoint(
-        repo_id=config.MODEL_REPO_ID,
+        model=config.MODEL_REPO_ID,
+        # repo_id=config.MODEL_REPO_ID,
         temperature=config.TEMPERATURE,
-        max_new_tokens=config.MAX_TOKENS
-        #huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN")
+        max_new_tokens=config.MAX_TOKENS,
+        huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN"),
         )
         return ChatHuggingFace(llm=llm)
     except Exception as e:
