@@ -17,6 +17,6 @@ if st.button("Generate Quiz"):
             if selected_option==quiz[1][quiz[2]]:
                 st.success("Correct answer!")
             else:
-                st.error("worong answer")
+                st.error("Wrong answer!")
     else:
         st.error("Please enter some text to generate a quiz.")

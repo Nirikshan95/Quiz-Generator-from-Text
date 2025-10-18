@@ -2,6 +2,7 @@
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-Frontend-red.svg)](https://streamlit.io/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green.svg)](https://fastapi.tiangolo.com/)
 [![AI Powered](https://img.shields.io/badge/AI-Powered-brightgreen.svg)](https://huggingface.co/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)](https://github.com/yourusername/Quiz-Generator-from-Text)
@@ -15,10 +16,9 @@ Perfect for educators, students, content creators, and anyone looking to create 
 ## 🌟 Key Features
 
 - **Smart Question Generation**: Automatically creates diverse question types from input text
-
 - **Intelligent Parsing**: Advanced text analysis to identify key concepts and facts
-
-- **Web Interface**: User-friendly Streamlit frontend (coming soon!)
+- **Multiple Interfaces**: Both web interface (Streamlit) and API (FastAPI) available
+- **Extensible Architecture**: Modular design for easy enhancements
 
 ## 🔧 Installation
 
@@ -61,21 +61,35 @@ Perfect for educators, students, content creators, and anyone looking to create 
 
 ## 🚀 Usage
 
+### Web Interface (Streamlit)
+
+Run the Streamlit web application:
+
+```bash
+streamlit run app.py
+```
+
+The web interface allows you to:
+- Enter text in a text area
+- Generate quizzes with multiple-choice questions
+- Interactively answer questions and get immediate feedback
+
+### API Interface (FastAPI)
+
+Run the FastAPI backend server:
+
+```bash
+uvicorn main:app --reload
+```
+
+Access the API documentation at `http://localhost:8000/docs`
+
 ### Command Line Interface
 
 Generate quizzes directly from the command line:
 
 ```bash
 python quiz_generation/quiz_gen.py
-```
-
-### Web Interface (Coming Soon!)
-
-We're working on a beautiful Streamlit web interface! Contributors are welcome to help complete the frontend integration.
-
-```bash
-# Once completed, you'll be able to run:
-streamlit run app.py
 ```
 
 ## 📊 Example Output
@@ -85,27 +99,27 @@ streamlit run app.py
 The photosynthesis process allows plants to convert sunlight, carbon dioxide, and water into glucose and oxygen. This process occurs primarily in the chloroplasts of plant cells, specifically in the chlorophyll molecules. The equation for photosynthesis is: 6CO2 + 6H2O + light energy → C6H12O6 + 6O2.
 ```
 
-
 ## 🏗️ Project Architecture
 
 ```
 Quiz-Generator-from-Text/
 ├── configs/
-│   └── settings.py              # Configuration management
+│   └── config.py               # Configuration settings
 ├── models/
-│   └── load_chat_model.py       # Model loading and initialization
+│   └── load_chat_model.py      # Model loading and initialization
 ├── output_parser/
-│   └── quiz_parser.py           # Question parsing and formatting
+│   └── quiz_parser.py          # Question parsing and formatting
 ├── prompts/
-│   └── quiz_prompt.txt          # Prompt templates for question generation
+│   └── quiz_prompt.txt         # Prompt templates for question generation
 ├── quiz_generation/
-│   └── quiz_gen.py              # Core quiz generation logic
-├── venv/                        # Virtual environment
-├── .env                         # Environment variables
-├── app.py                       # Streamlit frontend (in development)
-├── LICENSE                      # MIT License
-├── README.md                    # Project documentation
-└── requirements.txt             # Python dependencies
+│   └── quiz_gen.py             # Core quiz generation logic
+├── venv/                       # Virtual environment
+├── .env                        # Environment variables
+├── app.py                      # Streamlit frontend
+├── main.py                     # FastAPI backend
+├── LICENSE                     # MIT License
+├── README.md                   # Project documentation
+└── requirements.txt            # Python dependencies
 ```
 
 ## 🛠️ Core Components
@@ -127,8 +141,10 @@ Contains carefully crafted prompt that guide the AI to generate high-quality, ed
 Core libraries used in this project:
 
 - **langchain**: For LLM integration and chain operations
-- **streamlit**: Web interface framework (frontend)
+- **streamlit**: Web interface framework
+- **fastapi**: API framework for backend services
 - **pydantic**: Data validation and parsing
+- **langchain_huggingface**: Integration with Hugging Face models
 
 See `requirements.txt` for the complete dependency list.
 
@@ -136,11 +152,11 @@ See `requirements.txt` for the complete dependency list.
 
 We welcome contributions! Especially for:
 
-- **Frontend Development**: Help complete the Streamlit web interface
+- **UI/UX Improvements**: Enhance the Streamlit interface with better styling and user experience
 - **Question Types**: Add support for more question formats
 - **Model Integration**: Support for additional language models
 - **Export Features**: Multiple output formats (PDF, Word, etc.)
-- **UI/UX Improvements**: Make the interface more intuitive
+- **Additional Features**: Timer, scoring system, question categories
 
 ### How to Contribute
 
@@ -166,26 +182,27 @@ We welcome contributions! Especially for:
 
 ### Current Priority Areas
 
-- 🎨 **Frontend Integration**: Complete the Streamlit app integration
+- 🎨 **UI/UX Improvements**: Enhance the Streamlit app with better styling and organization
 - 📊 **Question Analytics**: Add difficulty scoring and question quality metrics
 - 🔄 **Batch Processing**: Support for multiple document processing
 - 📤 **Export Functionality**: PDF, Word, and other format exports
+- 🏗️ **Architecture Improvements**: Better separation of concerns and error handling
 
 ## 🐛 Known Issues & Roadmap
 
 ### Current Limitations
-- Streamlit frontend integration is incomplete
 - Limited to text input (no file upload yet)
 - Basic question formatting
+- Simple UI without advanced features
 
 ### Upcoming Features
-- [ ] Complete Streamlit web interface
 - [ ] File upload support (PDF, DOCX, TXT)
 - [ ] Question difficulty adjustment
 - [ ] Batch quiz generation
 - [ ] Export to multiple formats
 - [ ] Question bank management
 - [ ] User authentication and quiz history
+- [ ] Enhanced UI with better styling and organization
 
 ## 📄 License
 
@@ -195,6 +212,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Thanks to the Hugging Face community for providing excellent language models
 - Streamlit team for the amazing web app framework
+- FastAPI team for the excellent API framework
 - All contributors who help make this project better
 
 ## 📞 Support & Contact
