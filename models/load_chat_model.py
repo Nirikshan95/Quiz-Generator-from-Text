@@ -1,5 +1,4 @@
 from langchain_huggingface import ChatHuggingFace,HuggingFaceEndpoint
-import sys
 from configs import config
 import os
 from dotenv import load_dotenv

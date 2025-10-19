@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from langchain.output_parsers import PydanticOutputParser
+from langchain_core.output_parsers import PydanticOutputParser
 from typing import List
 
 # This Python class `OptionedQuiz` defines a model for a quiz question with multiple options and the
