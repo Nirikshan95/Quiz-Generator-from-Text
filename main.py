@@ -54,3 +54,4 @@ async def generate_quiz(request: QuizRequest):
     finally:
         os.environ.pop("HUGGINGFACEHUB_API_TOKEN", None)
         os.environ.pop("HF_TOKEN", None)
+        

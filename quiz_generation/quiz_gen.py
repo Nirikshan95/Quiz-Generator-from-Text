@@ -1,5 +1,4 @@
-import sys
-from langchain.prompts import PromptTemplate
+from langchain_core.prompts import PromptTemplate
 from models.load_chat_model import get_chat_model
 from output_parser.quiz_parser import parse_quiz
 
@@ -22,7 +21,10 @@ def create_quiz(text):
         template=open("./prompts/quiz_prompt.txt").read(),
         partial_variables={"format_instructions":quiz_parser.get_format_instructions()}
     )
-    chain=  qns_prompt|get_chat_model()|quiz_parser
+    model = get_chat_model()
+    if model is None:
+        raise RuntimeError("Chat model not available; check get_chat_model()")
+    chain = qns_prompt | model | quiz_parser
     return chain.invoke({"input_text":text})
 
 def post_process(result,index=0):
@@ -51,5 +53,3 @@ if __name__ == "__main__":
     #post_process(result)
     #print(result.quiz_out)
     
-    '''example text :
-    The capital of France is Paris. It is known for its art, fashion, and culture. The Eiffel Tower is one of its most famous landmarks. The Louvre Museum is also located in Paris and is home to thousands of works of art, including the Mona Lisa. Paris is a major European city and a global center for art, fashion, and culture. It is known for its cafe culture, and landmarks like the Eiffel Tower, Notre-Dame Cathedral, and the Louvre Museum. The city has a rich history and is often referred to as the 'City of Light'.'''
