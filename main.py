@@ -46,7 +46,7 @@ async def generate_quiz(request: QuizRequest):
         result = await quiz_chain.ainvoke({"input_text":request.text,"past_questions":request.past_quiz_qns})
         quiz=result.quiz_out
         
-        # .invoke({"input_text":text})
+
         
         if not quiz:
             raise HTTPException(status_code=500, detail="Quiz generation failed.")
