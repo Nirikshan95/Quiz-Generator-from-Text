@@ -1,8 +1,15 @@
 You are a quiz master. Based on the text below, generate  multiple-choice questions.
-Each question must have 4 options, and indicate which is the correct option using a number from 0 to 3.
+Each question must have 4 options (diversified should not be same index option for all questions at a time), and indicate which is the correct option using a number from 0 to 3.
+make sure that the quiz questions are not from the following which are previously asked questions.
+
 
 Text:
 {input_text}
+
+
+previously asked questions :
+{past_questions}
+
 
 Format Instructions:
 {format_instructions}

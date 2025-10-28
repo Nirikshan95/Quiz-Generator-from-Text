@@ -2,22 +2,26 @@ from langchain_core.prompts import PromptTemplate
 from models.load_chat_model import get_chat_model
 from output_parser.quiz_parser import parse_quiz
 
-def create_quiz(text):
+def create_quiz_chain():
     """
-    The function `create_quiz` takes a text input, creates a quiz parser, sets up a prompt template, and
-    then invokes a chain of operations to generate a quiz based on the input text.
+    The function `create_quiz_chain` generates a chatbot chain for creating a quiz based on provided
+    text and past questions.
     
-    :param text: The `create_quiz` function seems to be a part of a larger codebase related to creating
-    quizzes. It appears to take a text input and then processes it through a chain of operations
-    involving a quiz parser, a prompt template, and a chat model to generate a quiz
-    :return: The function `create_quiz(text)` takes a text input, creates a quiz parser, sets up a
-    prompt template for the quiz, and then invokes a chain of operations involving the quiz prompt, chat
-    model, and quiz parser. Finally, it returns the result of invoking this chain with the input text
-    provided.
+    :param text: The `text` parameter in the `create_quiz_chain` function is a string that represents
+    the text or content of the quiz. This text will be used as input for creating the quiz chain
+    :type text: str
+    :param past_questions: The `past_questions` parameter in the `create_quiz_chain` function is a list
+    of strings that stores the questions that have already been asked in the quiz. This parameter is
+    optional and has a default value of an empty list `[]`. It is used to keep track of the questions
+    that have been
+    :type past_questions: list[str]
+    :return: The function `create_quiz_chain` returns a chain of components that includes a prompt
+    template for a quiz question, a chat model, and a quiz parser.
     """
+    
     quiz_parser=parse_quiz()
     qns_prompt=PromptTemplate(
-        input_variables=["input_text"],
+        input_variables=["input_text","past_questions"],
         template=open("./prompts/quiz_prompt.txt").read(),
         partial_variables={"format_instructions":quiz_parser.get_format_instructions()}
     )
@@ -25,7 +29,7 @@ def create_quiz(text):
     if model is None:
         raise RuntimeError("Chat model not available; check get_chat_model()")
     chain = qns_prompt | model | quiz_parser
-    return chain.invoke({"input_text":text})
+    return chain
 
 def post_process(result,index=0):
     """
@@ -44,12 +48,3 @@ def post_process(result,index=0):
     """
     quiz = result.quiz_out[index]
     return quiz.question, quiz.options, quiz.answer_index
-
-    
-if __name__ == "__main__":
-    input_text = input("Enter the text to generate questions from: ")
-    result = create_quiz(input_text)
-    print(result)
-    #post_process(result)
-    #print(result.quiz_out)
-    

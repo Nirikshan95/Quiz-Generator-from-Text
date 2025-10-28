@@ -1,5 +1,5 @@
 import streamlit as st
-from quiz_generation.quiz_gen import create_quiz, post_process
+from quiz_generation.quiz_gen import create_quiz_chain, post_process
 
 st.title("Quiz Generator From Text")
 st.write("This app generates a quiz from the text you provide.")
@@ -7,7 +7,8 @@ input_text = st.text_area("Enter the text to generate questions from:", height=2
 if st.button("Generate Quiz"):
     if input_text:
         with st.spinner("Generating quiz..."):
-            result = create_quiz(input_text)
+            quiz_chain = create_quiz_chain(input_text)
+            result = quiz_chain.invoke({"input_text": input_text, "past_questions": []})
         st.success("Quiz generated successfully!")
         number_of_questions = len(result.quiz_out)
         for i in range(number_of_questions):

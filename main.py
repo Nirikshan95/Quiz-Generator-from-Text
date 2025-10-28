@@ -4,7 +4,7 @@ from typing import Annotated
 from fastapi import FastAPI,HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from output_parser.quiz_parser import OptionedQuiz
-from quiz_generation.quiz_gen import create_quiz
+from quiz_generation.quiz_gen import create_quiz_chain
 
 app=FastAPI(title="QuizGen API", version="1.0.0")
 
@@ -19,7 +19,8 @@ app.add_middleware(
 
 # Schemas
 class QuizRequest(BaseModel):
-    text: Annotated[str,Field(...,description="Text to generate quiz from")] 
+    text: Annotated[str,Field(...,description="Text/topic to generate quiz from")] 
+    past_quiz_qns: Annotated[list[str],Field(...,description="List of past quiz questions to avoid repetition")]
     api_key: Annotated[SecretStr,Field(...,description="Huggingface API Key for authentication")]
 
 class QuizResponse(BaseModel):
@@ -41,8 +42,11 @@ async def generate_quiz(request: QuizRequest):
     try:
         os.environ["HUGGINGFACEHUB_API_TOKEN"]=request.api_key.get_secret_value()
         os.environ["HF_TOKEN"]=request.api_key.get_secret_value()
-        result= create_quiz(request.text)
+        quiz_chain= create_quiz_chain()
+        result = await quiz_chain.ainvoke({"input_text":request.text,"past_questions":request.past_quiz_qns})
         quiz=result.quiz_out
+        
+        # .invoke({"input_text":text})
         
         if not quiz:
             raise HTTPException(status_code=500, detail="Quiz generation failed.")
