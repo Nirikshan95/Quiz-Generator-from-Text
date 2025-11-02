@@ -44,7 +44,7 @@ async def generate_quiz(request: QuizRequest):
         os.environ["HUGGINGFACEHUB_API_TOKEN"]=request.api_key.get_secret_value()
         os.environ["HF_TOKEN"]=request.api_key.get_secret_value()
         quiz_chain= create_quiz_chain()
-        result = await quiz_chain.ainvoke({"input_text":request.text,"past_questions":request.past_quiz_qns})
+        result = await quiz_chain.ainvoke({"level":request.level,"input_text":request.text,"past_questions":request.past_quiz_qns})
         quiz=result.quiz_out
         
 
