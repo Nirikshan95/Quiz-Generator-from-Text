@@ -21,7 +21,7 @@ def create_quiz_chain():
     
     quiz_parser=parse_quiz()
     qns_prompt=PromptTemplate(
-        input_variables=["input_text","past_questions"],
+        input_variables=["level","input_text","past_questions"],
         template=open("./prompts/quiz_prompt.txt").read(),
         partial_variables={"format_instructions":quiz_parser.get_format_instructions()}
     )

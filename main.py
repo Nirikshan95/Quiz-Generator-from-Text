@@ -1,6 +1,6 @@
 import os
 from pydantic import BaseModel, Field,SecretStr
-from typing import Annotated
+from typing import Annotated,Literal
 from fastapi import FastAPI,HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from output_parser.quiz_parser import OptionedQuiz
@@ -20,6 +20,7 @@ app.add_middleware(
 # Schemas
 class QuizRequest(BaseModel):
     text: Annotated[str,Field(...,description="Text/topic to generate quiz from")] 
+    level: Annotated[Literal["easy", "medium", "hard"],Field(...,description="Difficulty level of the quiz")]
     past_quiz_qns: Annotated[list[str],Field(...,description="List of past quiz questions to avoid repetition")]
     api_key: Annotated[SecretStr,Field(...,description="Huggingface API Key for authentication")]
 
