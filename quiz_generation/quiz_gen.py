@@ -1,8 +1,9 @@
 from langchain_core.prompts import PromptTemplate
 from models.load_chat_model import get_chat_model
 from output_parser.quiz_parser import parse_quiz
+from typing import Literal
 
-def create_quiz_chain():
+def create_quiz_chain(quiz_type:Literal["optioned_quiz","blanks_quiz","true_false_quiz","ordering_quiz","matching_quiz"]):
     """
     The function `create_quiz_chain` generates a chatbot chain for creating a quiz based on provided
     text and past questions.
@@ -18,18 +19,34 @@ def create_quiz_chain():
     :return: The function `create_quiz_chain` returns a chain of components that includes a prompt
     template for a quiz question, a chat model, and a quiz parser.
     """
-    
-    quiz_parser=parse_quiz()
-    qns_prompt=PromptTemplate(
-        input_variables=["level","input_text","past_questions"],
-        template=open("./prompts/quiz_prompt.txt").read(),
-        partial_variables={"format_instructions":quiz_parser.get_format_instructions()}
-    )
-    model = get_chat_model()
-    if model is None:
-        raise RuntimeError("Chat model not available; check get_chat_model()")
-    chain = qns_prompt | model | quiz_parser
-    return chain
+    try:
+        if quiz_type not in ["optioned_quiz","blanks_quiz","true_false_quiz","ordering_quiz","matching_quiz"]:
+            raise ValueError(f"Invalid quiz type: {quiz_type}. Supported types are 'optioned_quiz', 'blanks_quiz', 'true_false_quiz', 'ordering_quiz', 'matching_quiz'.")
+        if quiz_type=="matching_quiz":
+            temp_prompt=open("./prompts/matching_prompt.txt").read()
+        elif quiz_type=="ordering_quiz":
+            temp_prompt=open("./prompts/ordering_prompt.txt").read()
+        elif quiz_type=="true_false_quiz":
+            temp_prompt=open("./prompts/t_or_f_prompt.txt").read()
+        elif quiz_type=="blanks_quiz":
+            temp_prompt=open("./prompts/blanks_prompt.txt").read()
+        elif quiz_type=="optioned_quiz":
+            temp_prompt=open("./prompts/optioned_quiz_prompt.txt").read()
+            
+        
+        quiz_parser=parse_quiz(quiz_type=quiz_type)
+        qns_prompt=PromptTemplate(
+            input_variables=["level","input_text","past_questions"],
+            template=temp_prompt,
+            partial_variables={"format_instructions":quiz_parser.get_format_instructions()}
+        )
+        model = get_chat_model()
+        if model is None:
+            raise RuntimeError("Chat model not available; check get_chat_model()")
+        chain = qns_prompt | model | quiz_parser
+        return chain
+    except Exception as e:
+        raise e
 
 def post_process(result,index=0):
     """

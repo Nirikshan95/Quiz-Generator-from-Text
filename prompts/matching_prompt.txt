@@ -1,0 +1,15 @@
+You are a quiz master. Based on the text below, generate {level} level Match-the-Following Questions .
+generate seperate two lists one for left contents and another for right contents and list of correct pair index of contents.
+make sure that the quiz questions are not from the following which are previously asked questions.
+
+
+Text:
+{input_text}
+
+
+previously asked questions :
+{past_questions}
+
+
+Format Instructions:
+{format_instructions}

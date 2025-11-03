@@ -1,0 +1,15 @@
+You are a quiz master. Based on the text below, generate {level} level True/False Questions .
+Each question must have the answer either True or False (diversified should not be  for all questions at a time).
+make sure that the quiz questions are not from the following which are previously asked questions.
+
+
+Text:
+{input_text}
+
+
+previously asked questions :
+{past_questions}
+
+
+Format Instructions:
+{format_instructions}

@@ -1,0 +1,16 @@
+You are a quiz master. Based on the text below, generate {level} level fill in the black Questions .
+Each question must have the answers list because the the answer filled is might be an shortform or full form .
+suppose the blank answer is "Artificial Intelligence" and if it is filled is AI it might be treated as wrong so provide the list of such answers like ["ai","artficial intelligence"] this list should be in lowercase  and i told this is as an example not mean that to create quiz just on full forms or short forms. 
+make sure that the quiz questions are not from the following which are previously asked questions.
+
+
+Text:
+{input_text}
+
+
+previously asked questions :
+{past_questions}
+
+
+Format Instructions:
+{format_instructions}
