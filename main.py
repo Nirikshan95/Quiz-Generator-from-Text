@@ -27,7 +27,7 @@ class QuizRequest(BaseModel):
 class MatchingQuizRequest(BaseModel):
     text: Annotated[str,Field(...,description="Text/topic to generate matching quiz from")] 
     level: Annotated[Literal["easy", "medium", "hard"],Field(...,description="Difficulty level of the matching quiz")]
-    past_quiz_qns: Annotated[List[List[str]],Field(...,description="List of past quiz questions to avoid repetition")]
+    past_quiz_qns: Annotated[List[List[List[str]]],Field(...,description="List of past quiz questions to avoid repetition")]
     api_key: Annotated[SecretStr,Field(...,description="Huggingface API Key for authentication")]
 
 # ---------------------------------------------------------------

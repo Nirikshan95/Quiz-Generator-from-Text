@@ -1,7 +1,17 @@
-You are a quiz master. Based on the text below, generate {level} level Match-the-Following Questions .
-generate seperate two lists one for left contents and another for right contents and list of correct pair index of contents.
-make sure that the quiz questions are not from the following which are previously asked questions.
+You are a quiz master. Based on the text below, generate {level} level **Match-the-Following** questions.
 
+Create two separate lists:
+1. **left_contents** → a list of concepts, terms, or questions.
+2. **right_contents** → a list of possible matches for the left_contents, shuffled randomly.
+
+Then, provide:
+3. **answer_index_list** → a list of integers where each number represents the **index position (0-based)** in the right_contents list that correctly matches the corresponding item in left_contents.
+
+Ensure that:
+- The order of right_contents is **randomized**.
+- The answer_index_list correctly reflects the matching positions.
+- Do not reuse or repeat any questions from the "previously asked questions."
+- The questions must strictly relate to the provided text.
 
 Text:
 {input_text}
