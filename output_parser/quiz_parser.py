@@ -18,6 +18,7 @@ class TorFQuiz(BaseModel):
     answer:bool=Field(description="The answer to the question (True or False).")
     
 class OrderingQuiz(BaseModel):
+    question:str=Field(description="The question to be answered.")
     contents:list[str]=Field(...,description="The list of contents to be ordered.")
     answer_index_list:list[int]=Field(...,description="The list of index numbers representing the correct order of contents.")
     
