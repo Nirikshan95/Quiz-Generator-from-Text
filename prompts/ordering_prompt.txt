@@ -1,5 +1,5 @@
 You are a quiz master. Based on the text below, generate {level} level Ordering / Sequencing Questions .
-Each question must have list of texts (diversified), and index for indicate which is the correct order using a number from 0.
+Each question must have list of texts (diversified) make sure the default order should not be correct., and index for indicate which is the correct order using a number from 0.
 make sure that the quiz questions are not from the following which are previously asked questions.
 
 
